@@ -2,9 +2,11 @@
 import express from 'express'
 import healthRoutes from "./routes/healthRoutes.js";
 import utilityRoutes from "./routes/utilityRoutes.js";
+import {env} from "./config/env.js";
+import {AppError} from "./utils/AppError.js"
+import {errorHandler} from "./middlewares/errorHandler.js"
 
 
-const PORT = 3000
 const app = express()
 
 // middleWares
@@ -21,13 +23,16 @@ app.get('/', (req,res)=> {
 app.use( healthRoutes)
 app.use('/api',utilityRoutes)
 
-app.use((req, res) => {
-    res.status(404).json({message:"Route is not found!"})
+app.use((req, res, next) => {
+    next(new AppError("Route is not found", 404))
 })
 
-app.listen(PORT, () => {
-    console.log(`Server working in PORT:${PORT} `)
+app.use(errorHandler)
+
+app.listen(env.PORT, () => {
+    console.log(`${env.APP_NAME} running on port ${env.PORT}`)
 })
+
 
 
 

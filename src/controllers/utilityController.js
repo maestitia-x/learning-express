@@ -1,4 +1,5 @@
 import {add, multiply, subtract} from "../services/mathService.js"
+import {AppError} from "../utils/AppError.js"
 
 export function echoData(req, res) {
     return res.status(200).json({message:"Message Readed Successfully", receivedData:req.body})
@@ -23,7 +24,7 @@ export function sumNumbers(req,res) {
 
     const error = validateNumbers(a, b)
     if (error) {
-        return res.status(400).json({message: error})
+        throw new AppError(error, 400);
     }
 
     return res.status(200).json({
@@ -42,7 +43,7 @@ export function multiplyNumbers(req, res) {
 
     const error = validateNumbers(a, b)
     if (error) {
-        return res.status(400).json({message:error})
+        throw new AppError(error, 400)
     }
 
     return res.status(200).json({
@@ -57,7 +58,7 @@ export function subtractNumbers(req,res) {
 
     const error = validateNumbers(a, b)
     if (error) {
-        return res.status(400).json({message:error})
+        throw new AppError(error, 400)
     }
 
     return res.status(200).json({
