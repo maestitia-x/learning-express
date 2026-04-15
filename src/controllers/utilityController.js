@@ -1,31 +1,16 @@
 import {add, multiply, subtract} from "../services/mathService.js"
-import {AppError} from "../utils/AppError.js"
+
 
 export function echoData(req, res) {
     return res.status(200).json({message:"Message Readed Successfully", receivedData:req.body})
 }
 
-function validateNumbers (a,b) {
-    if ((a === undefined) || (b === undefined)) {
-        return "A and B have to be exist!"
-    }
 
-    if ((typeof a !== 'number') || (typeof b !== 'number')) {
-        return "A and B has to be a number not a string or other data types"
-    }
-
-    return null;
-
-}
 
 
 export function sumNumbers(req,res) {
     const {a, b} = req.body
 
-    const error = validateNumbers(a, b)
-    if (error) {
-        throw new AppError(error, 400);
-    }
 
     return res.status(200).json({
         message:"The data was summed successfully",
@@ -41,10 +26,7 @@ export function ping(req,res) {
 export function multiplyNumbers(req, res) {
     const {a, b} = req.body
 
-    const error = validateNumbers(a, b)
-    if (error) {
-        throw new AppError(error, 400)
-    }
+
 
     return res.status(200).json({
         message:"The data was multiplied successfully",
@@ -56,10 +38,6 @@ export function multiplyNumbers(req, res) {
 export function subtractNumbers(req,res) {
     const {a, b} = req.body
 
-    const error = validateNumbers(a, b)
-    if (error) {
-        throw new AppError(error, 400)
-    }
 
     return res.status(200).json({
         message:"A and B successfully subtracted",
