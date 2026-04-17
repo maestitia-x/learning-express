@@ -2,7 +2,7 @@ import {add, multiply, subtract} from "../services/mathService.js"
 
 
 export function echoData(req, res) {
-    return res.status(200).json({message:"Message Readed Successfully", receivedData:req.body})
+    return res.status(200).json({message:"Message Read Successfully", receivedData:req.body})
 }
 
 
