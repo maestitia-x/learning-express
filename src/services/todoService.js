@@ -43,7 +43,7 @@ export function updateTodo(id, updates) {
 }
 
 export function deleteTodo(id) {
-    const index = todos.indexOf(getTodoById(id))
+    const index = todos.findIndex((todo) => todo.id === id )
     if (index === -1) {
         return null;
     }

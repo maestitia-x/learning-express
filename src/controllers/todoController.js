@@ -27,12 +27,9 @@ export function getTodo(req,res) {
 export function addTodo(req,res) {
     const {title} = req.body
 
-    if (!title || typeof title !== 'string') {
-        throw new AppError("Title has to be filled and its data type string!")
-    }
 
     const newTodo = createTodo(title)
-    return res.status(200).json({
+    return res.status(201).json({
         success:true,
         message:"Todo has been created!",
         data:newTodo
