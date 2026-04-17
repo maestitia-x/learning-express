@@ -5,7 +5,7 @@ import utilityRoutes from "./routes/utilityRoutes.js";
 import {env} from "./config/env.js";
 import {AppError} from "./utils/AppError.js"
 import {errorHandler} from "./middlewares/errorHandler.js"
-
+import todoRoutes from "./routes/todoRoutes.js";
 
 const app = express()
 
@@ -22,7 +22,7 @@ app.get('/', (req,res)=> {
 
 app.use( healthRoutes)
 app.use('/api',utilityRoutes)
-
+app.use('/api/todos', todoRoutes)
 app.use((req, res, next) => {
     next(new AppError("Route is not found", 404))
 })
